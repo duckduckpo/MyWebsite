@@ -1,3 +1,4 @@
+/* Reset and General Styles */
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +12,7 @@ body {
     line-height: 1.6;
 }
 
+/* Header & Navigation */
 header {
     background-color: #ffffff;
     padding: 1rem 5%;
@@ -44,10 +46,27 @@ nav ul li a {
     color: #555;
     font-weight: 500;
     transition: color 0.3s;
+    position: relative;
 }
 
 nav ul li a:hover {
     color: #3498db;
+}
+
+/* Nav underline animation */
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    left: 0;
+    bottom: -4px;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 .btn-help {
@@ -87,7 +106,7 @@ nav ul li a:hover {
     font-weight: bold;
     margin: 0 10px;
     display: inline-block;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: transform 0.2s, background-color 0.2s, opacity 0.2s;
 }
 
 .main-btn {
@@ -102,9 +121,13 @@ nav ul li a:hover {
 
 .hero-btns a:hover {
     transform: translateY(-2px);
+    opacity: 0.9;
 }
 
+/* Content */
 .container {
+    max-width: 1200px;
+    margin: auto;
     padding: 50px 10%;
 }
 
@@ -116,72 +139,39 @@ nav ul li a:hover {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.helpline {
-    border-left: 5px solid #3498db;
-}
-
-footer {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
-/* Section headings */
 .info-box h3 {
     font-size: 1.6rem;
     margin-bottom: 12px;
     color: #2c3e50;
 }
 
-/* Text inside sections */
 .info-box p {
     font-size: 1rem;
     color: #555;
 }
 
-/* Buy & Sell sections emphasis */
 #buy, #sell {
     border-left: 5px solid #3498db;
 }
 
-/* Container spacing */
-.container {
-    max-width: 1200px;
-    margin: auto;
+.helpline {
+    border-left: 5px solid #3498db;
 }
 
-/* Navigation hover underline */
-nav ul li a {
-    position: relative;
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px;
 }
 
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background-color: #3498db;
-    left: 0;
-    bottom: -4px;
-    transition: width 0.3s;
-}
-
-nav ul li a:hover::after {
-    width: 100%;
-}
-
-/* Hero button hover effects */
-.main-btn:hover,
-.alt-btn:hover {
-    opacity: 0.9;
-}
-
-/* Footer text */
 footer p {
     font-size: 0.9rem;
     opacity: 0.85;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
     header {
         flex-direction: column;
