@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sell Products | Hosiery Marketplace</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* Sell Page Specific Styles */
+.sell-container {
+    max-width: 600px;
+    margin: 60px auto;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.sell-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-group select,
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+.total-box {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    margin-top: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #e67e22;
+}
+
+.sell-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background-color: #e67e22;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.sell-btn:hover {
+    opacity: 0.9;
+}
+
+.success-msg {
+    text-align: center;
+    color: green;
+    margin-top: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Hosiery Marketplace</h1>
+    <nav>
+        <ul>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="buy.html">Buy</a></li>
+            <li><a href="sell.html">Sell</a></li>
+            <li><a href="#helpline" class="btn-help">Helpline</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="sell-container">
+    <h2>List a Product for Sale</h2>
+
+    <div class="form-group">
+        <label for="productType">Product Type</label>
+        <select id="productType">
+            <option>Socks</option>
+            <option>Stockings</option>
+            <option>Thermal Wear</option>
+            <option>Sports Hosiery</option>
+            <option>Kids Hosiery</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" min="1" value="1" oninput="calculateTotal()">
+    </div>
+
+    <div class="form-group">
+        <label for="price">Price per Unit (₹)</label>
+        <input type="number" id="price" min="1" value="100" oninput="calculateTotal()">
+    </div>
+
+    <div class="total-box">
+        Total Value: ₹<span id="total">100</span>
+    </div>
+
+    <button class="sell-btn" onclick="submitListing()">Submit Listing</button>
+
+    <div class="success-msg" id="successMsg"></div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Hosiery Marketplace Platform. All rights reserved.</p>
+</footer>
+
+<script>
+function calculateTotal() {
+    const qty = document.getElementById("quantity").value;
+    const price = document.getElementById("price").value;
+    document.getElementById("total").innerText = qty * price;
+}
+
+function submitListing() {
+    document.getElementById("successMsg").innerText =
+        "Product listed successfully! (Demo only)";
+}
+</script>
+
+</body>
+</html>
