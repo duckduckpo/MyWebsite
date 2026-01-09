@@ -126,3 +126,87 @@ footer {
     text-align: center;
     padding: 20px;
 }
+/* Section headings */
+.info-box h3 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: #2c3e50;
+}
+
+/* Text inside sections */
+.info-box p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Buy & Sell sections emphasis */
+#buy, #sell {
+    border-left: 5px solid #3498db;
+}
+
+/* Container spacing */
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Navigation hover underline */
+nav ul li a {
+    position: relative;
+}
+
+nav ul li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #3498db;
+    left: 0;
+    bottom: -4px;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Hero button hover effects */
+.main-btn:hover,
+.alt-btn:hover {
+    opacity: 0.9;
+}
+
+/* Footer text */
+footer p {
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 8px;
+    }
+
+    .hero {
+        padding: 70px 5%;
+    }
+
+    .hero h3 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 30px 5%;
+    }
+}
