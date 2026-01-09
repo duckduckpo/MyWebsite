@@ -77,12 +77,15 @@ nav ul li a:hover::after {
 }
 
 /* Hero Section */
+/* Hero Section */
 .hero {
-    background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), 
-                url('https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&q=80&w=1200');
-    background-size: cover;
-    background-position: center;
-    color: white;
+    background: linear-gradient(
+        135deg,
+        #f6d365,
+        #fda085,
+        #fbc2eb
+    );
+    color: #2c3e50;
     padding: 100px 10%;
     text-align: center;
 }
@@ -110,13 +113,14 @@ nav ul li a:hover::after {
 }
 
 .main-btn {
-    background-color: #3498db;
+    background-color: #e67e22;
     color: white;
 }
 
 .alt-btn {
     background-color: white;
-    color: #2c3e50;
+    color: #e67e22;
+    border: 2px solid #e67e22;
 }
 
 .hero-btns a:hover {
