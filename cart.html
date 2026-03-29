@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart | Hosiery Marketplace</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.cart-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.total {
+    text-align: right;
+    font-size: 1.3rem;
+    margin-top: 20px;
+    font-weight: bold;
+    color: #e67e22;
+}
+
+.buy-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    border: none;
+    border-radius: 30px;
+    background-color: #27ae60;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.buy-btn:hover {
+    opacity: 0.9;
+}
+
+.empty {
+    text-align: center;
+    color: #888;
+    margin-top: 20px;
+}
+
+.success {
+    text-align: center;
+    color: green;
+    margin-top: 20px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Hosiery Marketplace</h1>
+    <nav>
+        <ul>
+            <li><a href="homepage.html">Home</a></li>
+            <li><a href="buy.html">Buy</a></li>
+            <li><a href="sell.html">Sell</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="cart-container">
+    <h2>Your Cart</h2>
+
+    <div id="cartItems"></div>
+
+    <div class="total" id="totalPrice"></div>
+
+    <button class="buy-btn" onclick="placeOrder()">Buy Now</button>
+
+    <div class="success" id="successMsg"></div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Hosiery Marketplace Platform. All rights reserved.</p>
+</footer>
+
+<script>
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cartItems");
+    const totalBox = document.getElementById("totalPrice");
+
+    container.innerHTML = "";
+
+    if (cart.length === 0) {
+        container.innerHTML = "<p class='empty'>Your cart is empty</p>";
+        totalBox.innerText = "";
+        return;
+    }
+
+    let total = 0;
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        container.innerHTML += `
+            <div class="cart-item">
+                <span>${item.name} (x${item.quantity})</span>
+                <span>₹${itemTotal}</span>
+            </div>
+        `;
+    });
+
+    totalBox.innerText = "Total: ₹" + total;
+}
+
+function placeOrder() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+        alert("Cart is empty!");
+        return;
+    }
+
+    localStorage.removeItem("cart");
+
+    document.getElementById("cartItems").innerHTML = "";
+    document.getElementById("totalPrice").innerText = "";
+    document.getElementById("successMsg").innerText =
+        "✅ Order placed successfully!";
+}
+
+loadCart();
+</script>
+
+</body>
+</html>
