@@ -82,10 +82,12 @@
 </head>
 
 <body>
+
 <div class="form-container">
   <h1>User Login</h1>
 
-  <form action="homepage.html">
+  <form onsubmit="loginUser(event)">
+    
     <label for="username">Username</label>
     <input type="text" id="username" placeholder="Enter your username" required>
 
@@ -101,5 +103,31 @@
     <input type="submit" value="Log In">
   </form>
 </div>
+
+<script>
+function loginUser(event) {
+    event.preventDefault();
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("pwd").value;
+    const dob = document.getElementById("DOB").value;
+    const email = document.getElementById("email").value;
+
+    if (!username || !password || !dob || !email) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    localStorage.setItem("user", JSON.stringify({
+        username,
+        email
+    }));
+
+    alert("Login successful!");
+
+    window.location.href = "homepage.html";
+}
+</script>
+
 </body>
 </html>
