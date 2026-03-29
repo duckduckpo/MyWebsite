@@ -41,6 +41,7 @@
             <li><a href="#about">About</a></li>
             <li><a href="#helpline" class="btn-help">Helpline</a></li>
             <li><span id="userDisplay"></span></li>
+            <li><button onclick="toggleLanguage()" style="padding:5px 10px;border:none;border-radius:5px;background:#2ecc71;color:white;cursor:pointer;">🌐 Lang</button></li>
         </ul>
     </nav>
 </header>
@@ -48,8 +49,8 @@
 <div class="welcome" id="welcomeText"></div>
 
 <section class="hero">
-    <h3>Quality Hosiery for Every Step</h3>
-    <p>Connecting manufacturers, sellers, and customers on one trusted platform.</p>
+    <h3 id="heroTitle">Quality Hosiery for Every Step</h3>
+    <p id="heroDesc">Connecting manufacturers, sellers, and customers on one trusted platform.</p>
 
     <div class="hero-btns">
         <a href="buy.html" class="main-btn">Start Shopping</a>
@@ -60,27 +61,26 @@
 <main class="container">
 
     <section id="buy" class="info-box">
-        <h3>Buy Premium Hosiery</h3>
-        <p>
-            Explore socks, stockings, innerwear, and daily essentials made with
-            high-quality fabric and competitive pricing.
-        </p>
+    <h3 id="buyTitle">Buy Premium Hosiery</h3>
+    <p id="buyDesc">
+        Explore socks, stockings, innerwear, and daily essentials made with
+        high-quality fabric and competitive pricing.
+    </p>
     </section>
 
     <section id="sell" class="info-box">
-        <h3>Sell With Us</h3>
-        <p>
-            Are you a manufacturer or local seller? Reach more customers and
-            grow your business with zero listing fees.
-        </p>
+    <h3 id="sellTitle">Sell With Us</h3>
+    <p id="sellDesc">
+        Are you a manufacturer or local seller? Reach more customers and
+        grow your business with zero listing fees.
+    </p>
     </section>
-
-    <section id="about" class="info-box">
-        <h3>About Hosiery Marketplace</h3>
-        <p>
-            Hosiery Marketplace is a digital platform designed to connect producers
-            directly with consumers. We focus on quality, affordability, and trust.
-        </p>
+<section id="about" class="info-box">
+    <h3 id="aboutTitle">About Hosiery Marketplace</h3>
+    <p id="aboutDesc">
+        Hosiery Marketplace is a digital platform designed to connect producers
+        directly with consumers.
+    </p>
     </section>
 
     <section id="helpline" class="info-box helpline">
@@ -115,6 +115,49 @@ function logout() {
     window.location.href = "index.html";
 }
 </script>
+<script>
 
+let currentLang = localStorage.getItem("lang") || "en";
+
+function applyLanguage(lang) {
+
+    if (lang === "hi") {
+        document.getElementById("heroTitle").innerText = "हर कदम के लिए गुणवत्ता होजरी";
+        document.getElementById("heroDesc").innerText = "निर्माताओं, विक्रेताओं और ग्राहकों को जोड़ने वाला प्लेटफॉर्म";
+
+        document.getElementById("buyTitle").innerText = "प्रीमियम होजरी खरीदें";
+        document.getElementById("buyDesc").innerText = "उच्च गुणवत्ता वाले मोज़े, स्टॉकिंग्स और दैनिक आवश्यकताएं खोजें";
+
+        document.getElementById("sellTitle").innerText = "हमारे साथ बेचें";
+        document.getElementById("sellDesc").innerText = "अपने व्यवसाय को बढ़ाएं और अधिक ग्राहकों तक पहुंचें";
+
+        document.getElementById("aboutTitle").innerText = "हमारे बारे में";
+        document.getElementById("aboutDesc").innerText = "यह प्लेटफॉर्म निर्माताओं और ग्राहकों को सीधे जोड़ता है";
+
+    } else {
+        document.getElementById("heroTitle").innerText = "Quality Hosiery for Every Step";
+        document.getElementById("heroDesc").innerText = "Connecting manufacturers, sellers, and customers on one trusted platform.";
+
+        document.getElementById("buyTitle").innerText = "Buy Premium Hosiery";
+        document.getElementById("buyDesc").innerText = "Explore socks, stockings, innerwear, and daily essentials made with high-quality fabric and competitive pricing.";
+
+        document.getElementById("sellTitle").innerText = "Sell With Us";
+        document.getElementById("sellDesc").innerText = "Are you a manufacturer or local seller? Reach more customers and grow your business with zero listing fees.";
+
+        document.getElementById("aboutTitle").innerText = "About Hosiery Marketplace";
+        document.getElementById("aboutDesc").innerText = "Hosiery Marketplace is a digital platform designed to connect producers directly with consumers.";
+    }
+
+    localStorage.setItem("lang", lang);
+}
+
+function toggleLanguage() {
+    currentLang = currentLang === "en" ? "hi" : "en";
+    applyLanguage(currentLang);
+}
+
+applyLanguage(currentLang);
+
+</script>
 </body>
 </html>
