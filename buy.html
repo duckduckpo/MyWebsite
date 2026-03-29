@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* Buy Page Specific Styles */
 .buy-header {
     padding: 40px 10%;
     text-align: center;
@@ -81,7 +80,7 @@
         <ul>
             <li><a href="homepage.html">Home</a></li>
             <li><a href="buy.html">Buy</a></li>
-            <li><a href="#sell">Sell</a></li>
+            <li><a href="sell.html">Sell</a></li>
             <li><a href="#helpline" class="btn-help">Helpline</a></li>
         </ul>
     </nav>
@@ -94,62 +93,78 @@
 
 <div class="filter-bar">
     <strong>Sort by price:</strong>
-    <select id="sortPrice" onchange="sortProducts()">
+    <select id="sortPrice">
         <option value="low">Low to High</option>
         <option value="high">High to Low</option>
     </select>
 </div>
 
-<div class="product-grid" id="productGrid">
-    <!-- Products injected by JS -->
-</div>
+<div id="root"></div>
 
 <footer>
     <p>&copy; 2026 Hosiery Marketplace Platform. All rights reserved.</p>
 </footer>
 
-<script>
-const products = [
-    { name: "Cotton Ankle Socks", price: 149 },
-    { name: "Wool Winter Socks", price: 249 },
-    { name: "Formal Stockings", price: 199 },
-    { name: "Sports Crew Socks", price: 179 },
-    { name: "Thermal Hosiery Set", price: 399 },
-    { name: "Kids Soft Socks", price: 99 }
-];
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-function displayProducts(list) {
-    const grid = document.getElementById("productGrid");
-    grid.innerHTML = "";
+<script type="text/babel">
 
-    list.forEach(product => {
-        grid.innerHTML += `
-            <div class="product-card">
-                <h4>${product.name}</h4>
-                <div class="price">₹${product.price}</div>
-                <div class="quantity">
-                    <label>Qty:</label>
-                    <input type="number" min="1" value="1">
-                </div>
-            </div>
-        `;
-    });
-}
+function App() {
 
-function sortProducts() {
-    const sortValue = document.getElementById("sortPrice").value;
-    let sorted = [...products];
+    const defaultProducts = [
+        { name: "Cotton Ankle Socks", price: 149 },
+        { name: "Wool Winter Socks", price: 249 },
+        { name: "Formal Stockings", price: 199 },
+        { name: "Sports Crew Socks", price: 179 },
+        { name: "Thermal Hosiery Set", price: 399 },
+        { name: "Kids Soft Socks", price: 99 }
+    ];
 
-    if (sortValue === "low") {
-        sorted.sort((a, b) => a.price - b.price);
-    } else {
-        sorted.sort((a, b) => b.price - a.price);
+    const [products, setProducts] = React.useState(defaultProducts);
+
+    React.useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem("products")) || [];
+        setProducts([...defaultProducts, ...stored]);
+    }, []);
+
+    function sortProducts(value) {
+        let sorted = [...products];
+
+        if (value === "low") {
+            sorted.sort((a, b) => a.price - b.price);
+        } else {
+            sorted.sort((a, b) => b.price - a.price);
+        }
+
+        setProducts(sorted);
     }
 
-    displayProducts(sorted);
+    React.useEffect(() => {
+        const select = document.getElementById("sortPrice");
+        select.addEventListener("change", (e) => sortProducts(e.target.value));
+    }, [products]);
+
+    return (
+        <div className="product-grid">
+            {products.map((product, index) => (
+                <div className="product-card" key={index}>
+                    <h4>{product.name}</h4>
+                    <div className="price">₹{product.price}</div>
+
+                    <div className="quantity">
+                        <label>Qty:</label>
+                        <input type="number" min="1" defaultValue="1" />
+                    </div>
+                </div>
+            ))}
+        </div>
+    );
 }
 
-displayProducts(products);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
 </script>
 
 </body>
