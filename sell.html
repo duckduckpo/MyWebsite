@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-/* Sell Page Specific Styles */
 .sell-container {
     max-width: 600px;
     margin: 60px auto;
@@ -140,8 +139,31 @@ function calculateTotal() {
 }
 
 function submitListing() {
+    const type = document.getElementById("productType").value;
+    const qty = document.getElementById("quantity").value;
+    const price = document.getElementById("price").value;
+
+    if (!type || qty <= 0 || price <= 0) {
+        alert("Enter valid details");
+        return;
+    }
+
+    const newProduct = {
+        name: type,
+        price: Number(price)
+    };
+
+    let products = JSON.parse(localStorage.getItem("products")) || [];
+    products.push(newProduct);
+
+    localStorage.setItem("products", JSON.stringify(products));
+
     document.getElementById("successMsg").innerText =
-        "Product listed successfully!";
+        "Product listed successfully! It will now appear in Buy section.";
+
+    document.getElementById("quantity").value = 1;
+    document.getElementById("price").value = 100;
+    calculateTotal();
 }
 </script>
 
