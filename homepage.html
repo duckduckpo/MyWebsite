@@ -5,13 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hosiery Marketplace | Buy & Sell</title>
 
-    <!-- Main Styles -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Small enhancement -->
     <style>
         html {
             scroll-behavior: smooth;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #2c3e50;
+        }
+
+        .logout-btn {
+            margin-left: 15px;
+            padding: 6px 12px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -25,11 +40,13 @@
             <li><a href="sell.html">Sell</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#helpline" class="btn-help">Helpline</a></li>
+            <li><span id="userDisplay"></span></li>
         </ul>
     </nav>
 </header>
 
-<!-- Hero -->
+<div class="welcome" id="welcomeText"></div>
+
 <section class="hero">
     <h3>Quality Hosiery for Every Step</h3>
     <p>Connecting manufacturers, sellers, and customers on one trusted platform.</p>
@@ -40,7 +57,6 @@
     </div>
 </section>
 
-<!-- Main Content -->
 <main class="container">
 
     <section id="buy" class="info-box">
@@ -79,6 +95,26 @@
 <footer>
     <p>&copy; 2026 Hosiery Marketplace Platform. All rights reserved.</p>
 </footer>
+
+<script>
+const user = JSON.parse(localStorage.getItem("user"));
+
+if (user) {
+    document.getElementById("welcomeText").innerText =
+        "Welcome, " + user.username + "!";
+
+    document.getElementById("userDisplay").innerHTML =
+        user.username + ' <a href="#" class="logout-btn" onclick="logout()">Logout</a>';
+} else {
+    // If not logged in → redirect
+    window.location.href = "index.html";
+}
+
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "index.html";
+}
+</script>
 
 </body>
 </html>
